@@ -1,4 +1,5 @@
-source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
 target "HXPhotoPickerExample" do
   platform:ios,'8.0'
     #ios14下出现显示空白需要将SDWebImage升级到最新版，YYWebImage由于没人维护所以需要替换成SDWebImage
@@ -9,8 +10,8 @@ target "HXPhotoPickerExample" do
 #    pod 'YYWebImage'
 end
 
-target "HXPHPickerExample" do
-  platform:ios,'12.0'
-  use_frameworks!
-  pod 'HXPHPicker'
-end
+#target "HXPHPickerExample" do
+#  platform:ios,'12.0'
+#  use_frameworks!
+#  pod 'HXPHPicker'
+#end

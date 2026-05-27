@@ -66,7 +66,6 @@
 
 #define HXShowLog NO
 
-#define HX_UI_IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
 #define HX_ALLOW_LOCATION ([[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"] || [[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"])
 
@@ -84,37 +83,88 @@
 
 #define HX_ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define HX_ScreenHeight [UIScreen mainScreen].bounds.size.height
+#define HX_UI_IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
-#define HX_IS_IPHONEX (CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(375, 812)) || CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)) || CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(414, 896)) || CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(896, 414)))
+// 是否为 iPad
 
-// 判断iPhone X
-#define HX_Is_iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+// 是否为全面屏设备（通过安全区域判断，兼容后续新机型）
+static inline UIWindow * _Nullable HXKeyWindow(void) {
+    UIWindow *window = nil;
+    
+    if (@available(iOS 13.0, *)) {
+        for (UIScene *scene in [UIApplication sharedApplication].connectedScenes) {
+            if ([scene isKindOfClass:[UIWindowScene class]]) {
+                UIWindowScene *windowScene = (UIWindowScene *)scene;
+                for (UIWindow *tmpWindow in windowScene.windows) {
+                    if (tmpWindow.isKeyWindow) {
+                        window = tmpWindow;
+                        break;
+                    }
+                }
+            }
+            if (window) {
+                break;
+            }
+        }
+    }
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    if (!window) {
+        window = [UIApplication sharedApplication].keyWindow;
+    }
+#pragma clang diagnostic pop
+    
+    return window;
+}
 
-//判断iPHoneXr
-#define HX_Is_iPhoneXR ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !HX_UI_IS_IPAD : NO)
+static inline BOOL HX_isFullScreenDevice(void) {
+    if (@available(iOS 11.0, *)) {
+        UIWindow *window = HXKeyWindow();
+        return !HX_UI_IS_IPAD && window.safeAreaInsets.bottom > 0;
+    }
+    return NO;
+}
 
-//判断iPHoneXs
-#define HX_Is_iPhoneXS ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !HX_UI_IS_IPAD : NO)
+static inline CGFloat HXBottomSafeArea(void) {
+    if (@available(iOS 11.0, *)) {
+        return HXKeyWindow().safeAreaInsets.bottom;
+    }
+    return 0;
+}
 
-//判断iPhoneXs Max
-#define HX_Is_iPhoneXS_MAX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !HX_UI_IS_IPAD : NO)
-
-//判断iPHone12 mini
-#define HX_Is_iPhoneTwelveMini ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1080, 2340), [[UIScreen mainScreen] currentMode].size) && !HX_UI_IS_IPAD : NO)
-
-//判断iPHone12 和 iPHone12 Pro
-#define HX_Is_iPhoneTwelvePro ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1170, 2532), [[UIScreen mainScreen] currentMode].size) && !HX_UI_IS_IPAD : NO)
-
-//判断iPHone12 ProMax
-#define HX_Is_iPhoneTwelveProMax ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1284, 2778), [[UIScreen mainScreen] currentMode].size) && !HX_UI_IS_IPAD : NO)
-
-#define HX_IS_IPhoneX_All (HX_Is_iPhoneX || HX_Is_iPhoneXR || HX_Is_iPhoneXS || HX_Is_iPhoneXS_MAX || HX_IS_IPHONEX || HX_Is_iPhoneTwelveMini || HX_Is_iPhoneTwelvePro || HX_Is_iPhoneTwelveProMax)
+#define HX_IS_IPHONEX HX_isFullScreenDevice()
+#define HX_Is_iPhoneX HX_isFullScreenDevice()
+#define HX_Is_iPhoneXR HX_isFullScreenDevice()
+#define HX_Is_iPhoneXS HX_isFullScreenDevice()
+#define HX_Is_iPhoneXS_MAX HX_isFullScreenDevice()
+#define HX_Is_iPhoneTwelveMini HX_isFullScreenDevice()
+#define HX_Is_iPhoneTwelvePro HX_isFullScreenDevice()
+#define HX_Is_iPhoneTwelveProMax HX_isFullScreenDevice()
+#define HX_IS_IPhoneX_All HX_isFullScreenDevice()
 
 // 导航栏 + 状态栏 的高度
 #define hxNavigationBarHeight ((HX_UI_IS_IPAD ? 50 : 44) + HXStatusBarHeight)
-#define hxTopMargin (HX_IS_IPhoneX_All ? 44 : 0)
-#define hxBottomMargin (HX_IS_IPhoneX_All ? 34 : 0)
-#define HXStatusBarHeight [HXPhotoTools getStatusBarHeight]
+#define hxTopMargin (HX_IS_IPhoneX_All ? HXStatusBarHeight : 0)
+#define hxBottomMargin (HX_IS_IPhoneX_All ? HXBottomSafeArea() : 0)
+
+static inline CGFloat HXStatusBarHeightValue(void) {
+    CGFloat statusBarHeight = 0;
+    
+    if (@available(iOS 13.0, *)) {
+        UIWindow *window = HXKeyWindow();
+        statusBarHeight = window.windowScene.statusBarManager.statusBarFrame.size.height;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+#pragma clang diagnostic pop
+    }
+    
+    return statusBarHeight;
+}
+
+#define HXStatusBarHeight HXStatusBarHeightValue()
 
 #define HX_IOS14_Later ([UIDevice currentDevice].systemVersion.floatValue >= 14.0f)
 

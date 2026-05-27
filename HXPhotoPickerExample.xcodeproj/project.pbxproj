@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21DD13EBAE07BB96CCC6772E /* Pods_HXPHPickerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A5D2707D7E9D74D09D7978 /* Pods_HXPHPickerExample.framework */; };
 		438A0ED618CD3AF385950318 /* libPods-HXPhotoPickerExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6254BB2C20603515D5A76A4 /* libPods-HXPhotoPickerExample.a */; };
 		7B08595324FA58DE00E93091 /* WxMomentPublishViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B08590D24FA58DE00E93091 /* WxMomentPublishViewController.xib */; };
 		7B08595424FA58DE00E93091 /* YYWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B08590E24FA58DE00E93091 /* YYWeakProxy.m */; };
@@ -756,10 +755,7 @@
 		7BD52EC024FE250E00AE3D7C /* HXPhotoPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HXPhotoPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BD52EC324FE250E00AE3D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BE8DFD624C68B2800306042 /* HXPhotoViewCellCustomProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HXPhotoViewCellCustomProtocol.h; sourceTree = "<group>"; };
-		C629E186D5E5B5CCE9BB584A /* Pods-HXPHPickerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HXPHPickerExample.debug.xcconfig"; path = "Target Support Files/Pods-HXPHPickerExample/Pods-HXPHPickerExample.debug.xcconfig"; sourceTree = "<group>"; };
-		D634D25CE084AB88B72380DC /* Pods-HXPHPickerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HXPHPickerExample.release.xcconfig"; path = "Target Support Files/Pods-HXPHPickerExample/Pods-HXPHPickerExample.release.xcconfig"; sourceTree = "<group>"; };
 		E6254BB2C20603515D5A76A4 /* libPods-HXPhotoPickerExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HXPhotoPickerExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4A5D2707D7E9D74D09D7978 /* Pods_HXPHPickerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HXPHPickerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -767,7 +763,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21DD13EBAE07BB96CCC6772E /* Pods_HXPHPickerExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,8 +798,6 @@
 			children = (
 				16A9631049F51EB2C9886F18 /* Pods-HXPhotoPickerExample.debug.xcconfig */,
 				3582D2EABCA69E96E4C95300 /* Pods-HXPhotoPickerExample.release.xcconfig */,
-				C629E186D5E5B5CCE9BB584A /* Pods-HXPHPickerExample.debug.xcconfig */,
-				D634D25CE084AB88B72380DC /* Pods-HXPHPickerExample.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1256,7 +1249,6 @@
 				7B752DE92372ADF300580F35 /* PhotosUI.framework */,
 				7B752DE72372ADF000580F35 /* Photos.framework */,
 				E6254BB2C20603515D5A76A4 /* libPods-HXPhotoPickerExample.a */,
-				F4A5D2707D7E9D74D09D7978 /* Pods_HXPHPickerExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1473,12 +1465,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B3EDECF255E185B00937B4A /* Build configuration list for PBXNativeTarget "HXPHPickerExample" */;
 			buildPhases = (
-				EB102FF5A30D8D584CC958B5 /* [CP] Check Pods Manifest.lock */,
 				7B3EDEBA255E185900937B4A /* Sources */,
 				7B3EDEBB255E185900937B4A /* Frameworks */,
 				7B3EDEBC255E185900937B4A /* Resources */,
 				7BC2310925B189A100434BBB /* Embed Frameworks */,
-				C97BF98F38640F3DE2A48852 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1543,7 +1533,7 @@
 					};
 					7B7E3E751E4AACD1002234EE = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 36YN45CVLK;
+						DevelopmentTeam = Y2HHAJSRU5;
 						ProvisioningStyle = Automatic;
 					};
 					7BD52EBF24FE250E00AE3D7C = {
@@ -1681,48 +1671,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-HXPhotoPickerExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C97BF98F38640F3DE2A48852 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HXPHPickerExample/Pods-HXPHPickerExample-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/HXPHPicker/HXPHPicker.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HXPHPicker.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HXPHPickerExample/Pods-HXPHPickerExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EB102FF5A30D8D584CC958B5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HXPHPickerExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2000,7 +1948,6 @@
 /* Begin XCBuildConfiguration section */
 		7B3EDED0255E185B00937B4A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C629E186D5E5B5CCE9BB584A /* Pods-HXPHPickerExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2035,7 +1982,6 @@
 		};
 		7B3EDED1255E185B00937B4A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D634D25CE084AB88B72380DC /* Pods-HXPHPickerExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2182,7 +2128,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 36YN45CVLK;
+				DEVELOPMENT_TEAM = Y2HHAJSRU5;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -2211,7 +2157,7 @@
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36YN45CVLK;
+				DEVELOPMENT_TEAM = Y2HHAJSRU5;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
